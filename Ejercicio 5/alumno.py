@@ -23,4 +23,3 @@ class Alumno:
         return self.__division
     def getInasistencias(self):
         return self.__inasistencias
-    
