@@ -1,6 +1,6 @@
-import csv
-
 from alumno import Alumno
+
+from listaalumnos import ListaAlumnos
 
 def salir():
     pass
@@ -9,15 +9,7 @@ def listado():
     año = input('Ingrese año: ')
     div = input('Ingrese division: ')
     div = div.upper() #Coloca la division ingresada en mayusculas
-    total_clases = Alumno.getTotal()
-    max_i = Alumno.getMax()
-    print('    Alumno     Porcentaje de inasistencia')
-    for i in lista_alumnos:
-        if i.getAño() == año and i.getDiv() == div:
-            inas = i.getInasistencias()
-            if inas > max_i:
-                porcentaje = float(inas * 100 / total_clases) 
-                print('%10s %28d %%' %(i.getNombre(), porcentaje))
+    lista_alumnos.mostrarListado(año, div)
     
 def modificar():
     maximo = int(input('Ingrese el nuevo maximo de inasistencias permitido: '))
@@ -34,11 +26,8 @@ def switch(arg):
     func()
 
 if __name__ == '__main__':
-    lista_alumnos = []
-    archivo = open('alumnos.csv')
-    reader = csv.reader(archivo, delimiter = ',')
-    for fila in reader:
-        lista_alumnos.append(Alumno(fila[0], fila[1], fila[2], int(fila[3])))
+    lista_alumnos = ListaAlumnos('alumnos.csv')
+    
     bandera = False
     while not bandera:
         print("""
